@@ -1,16 +1,17 @@
 package utils
 
-import sttp.client4.quick
-import sttp.client4.Response
+import scala.io.StdIn
+import java.io.File
 
 class Utils {
-  val response: Response[String] = quickRequest
-  .get(uri"https://httpbin.org/get")
-  .send()
 
-    println(response.code)
-    // prints: 200
-
-    println(response.body)
-    // prints some JSON string
+  def readInputsFromConsole(): List[List[String]] = {
+    println(new File(".").getAbsolutePath)
+    val source = scala.io.Source.fromFile("./inputs/Day1.txt")
+    try {
+      val lines = source.getLines 
+      lines.toList.map(s => s.split("""\s+""").toList)
+    } finally source.close()
+    
+  }
 }
